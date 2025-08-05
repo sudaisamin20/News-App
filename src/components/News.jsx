@@ -20,13 +20,12 @@ const News = (props) => {
 
   const fetchInitialData = async () => {
     try {
-      let url = `http://localhost:5000/news/${location.toLowerCase()}/${category}/1`
       progress(10)
       setLoading(true)
+      const response = await fetch(`https://backend-for-news-app-production.up.railway.app/news/${location.toLowerCase()}/${category}/${pageRef.current}`)
 
-      let response = await fetch(url)
       progress(40)
-
+      console.log(response)
       if (!response.ok) {
         throw new Error('Failed to fetch news')
       }
@@ -73,9 +72,7 @@ const News = (props) => {
       }
 
       pageRef.current += 1
-      let url = `http://localhost:5000/news/${location.toLowerCase()}/${category}/${pageRef.current}`
-
-      let response = await fetch(url)
+      let response = await fetch(`https://backend-for-news-app-production.up.railway.app/news/${location.toLowerCase()}/${category}/${pageRef.current}`)
 
       if (!response.ok) {
         console.error('Failed to fetch moreF data')
