@@ -3,7 +3,7 @@ import { useLocation, useTheme } from './ThemeContext'
 import { CiSearch } from "react-icons/ci"
 
 const Newitem = (props) => {
-  const { articles, category } = props
+  const { articles, category, loading } = props
   const [inputText, setInputText] = useState("")
   const { theme } = useTheme()
   const { location, updateLocation } = useLocation()
@@ -118,6 +118,13 @@ const Newitem = (props) => {
               </div>
             </div>
           })}
+        </div>
+        <div className='mt-5'>
+          {!loading && articles.length === 0 && (
+            <div className={`text-center py-4 ${theme === "light" ? "text-gray-600" : "text-gray-400"}`}>
+              <p>No articles found for this category in {countryName}.</p>
+            </div>
+          )}
         </div>
       </div>
     </div>
